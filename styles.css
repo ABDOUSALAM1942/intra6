@@ -1,0 +1,84 @@
+body {
+    background-color: #42576e;
+}
+*{
+    color: #fff;
+}
+#Update {
+    display: none;
+}
+#conteneur {
+    display: flex;
+    justify-content: center;
+    margin: 30px auto;
+    background-color: white;
+    height: 80vh;
+    width: 80%;
+    left: 5%;
+    top: 5%;
+    border-radius: 10px;
+    border: 2px solid rgb(75, 211, 170);
+}
+.side {
+    display: flex; /* Ajoutez ceci pour activer Flexbox */
+    flex-direction: column; /* Pour empiler les éléments verticalement */
+    justify-content: flex-start; /* Alignez les éléments en haut */
+    border-radius: 10px 0 0 10px;
+    width: 17rem;
+    height: 80vh;
+    margin-right: 1rem; /* Réduisez la marge pour les rapprocher */
+    border: 1px solid rgb(75, 211, 170);
+}
+#table.row {
+    width: 84%; 
+}
+.h2 {
+    background-color: rgb(14, 186, 149);
+    border-radius: 10px 0 0 0;
+    height: 46px;
+}
+.h2p {
+    color: rgb(14, 186, 149);
+    border-radius: 10px;
+}
+#inp {
+    margin-left: 2rem;
+    width: 26rem;
+    font-size: 14px;
+}
+#Submit {
+    padding: 1px;
+    font-size: 20px;
+    height: 35px;
+    width: 13rem;
+    background-color: rgb(14, 186, 149);
+}
+#tache {
+    /* border: 1px solid black; */
+    height: 32rem;
+}
+#h5 {
+    color: rgb(14, 186, 149);
+    text-align: center;
+}
+.table th {
+    background-color: rgb(14, 186, 149);
+    color: #fff;
+
+}
+#put2,#put3,#put4,#put5 {
+  margin-top: -20px;
+}
+hr {
+    height: 2px; /* Hauteur de la ligne */
+    background-color: #333; /* Couleur de la ligne */
+    width: 15rem;
+
+}
+.desc {
+    margin-bottom: 2rem;
+    height: 9rem;
+    width: 98%;
+    border: 1px solid rgb(75, 211, 170);
+    border-radius: 5px
+}
