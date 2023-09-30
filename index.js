@@ -375,10 +375,9 @@ function updateStatusChart() {
             datasets: [{
                 data: Object.values(statusCount),
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                ],
+                    '#FF6384', '#36A2EB', '#FFCE56', 
+                    // Vous pouvez ajouter plus de couleurs ici si nécessaire
+                  ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
@@ -388,8 +387,11 @@ function updateStatusChart() {
             }],
         },
         options: {
-
-        },
+            responsive: true, // Permet au graphique de s'adapter à la taille de son conteneur
+            layout: {
+              padding: 20,
+            },
+          },
     });
 }
 
