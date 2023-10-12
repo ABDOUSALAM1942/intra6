@@ -303,9 +303,6 @@ function AddOrUpdateData(data) {
     resetForm();
 }
 
-// Cette fonction gère l'ajout ou la mise à jour de données en fonction de la présence ou de l'absence du bouton "Update".
-// Elle récupère les valeurs du formulaire, crée un nouvel objet de données, puis appelle 'addData' ou 'updateData' en conséquence.
-// Enfin, elle réinitialise le formulaire en effaçant les valeurs entrées.
 
 // Gestionnaire d'événement pour le bouton "Edit"
 function editData(id) {
@@ -335,19 +332,6 @@ function editData(id) {
     }
 }
 
-// Cette fonction remplit le formulaire avec les données d'une entrée existante en utilisant son ID.
-// Elle permet de pré-remplir le formulaire pour faciliter la modification des données existantes.
-// Elle met également à jour le texte du bouton "Ajouter" en "Mettre à jour" et affiche le bouton "Mettre à jour".
-
-// // Gestionnaire d'événement pour le bouton "Delete" à côté de chaque élément
-// function deleteData(id) {
-//     const confirmed = confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?');
-
-//     if (confirmed) {
-//         // Si l'utilisateur confirme la suppression
-//         deleteData(id); // Appeler la fonction pour supprimer l'entrée par ID
-//     }
-// }
 const statusChartCanvas = document.getElementById('statutChart').getContext('2d');
 let statusChart;
 

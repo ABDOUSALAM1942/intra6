@@ -36,7 +36,7 @@ body {
 
 #table.row {
     width: 84%;
-    height: 54vh;
+    height: 154vh;
 }
 
 .h2 {
@@ -147,6 +147,7 @@ hr {
 .close {
     cursor: pointer;
 }
+
 .close2 {
     cursor: pointer;
     color: #1ece61;
@@ -179,21 +180,182 @@ hr {
     margin-top: -11rem;
 }
 
-#notificationModal{
+#notificationModal {
     overflow: visible;
 }
+
 /* Style pour le texte de notification à l'intérieur de la fenêtre modale */
 .notification-modal #notificationMessage {
     padding: 10px;
     margin: 0;
     text-align: center;
 }
+
 /* Styles pour le texte en blanc */
 .white-text {
-    color: white; /* Texte en blanc */
+    color: white;
+    /* Texte en blanc */
 }
 
 /* Styles pour le texte en noir */
 .black-text {
-    color: black; /* Texte en noir */
+    color: black;
+    /* Texte en noir */
+}
+
+
+@media (max-width: 1440px) {
+    #conteneur {
+        height: 120vh;
+    }
+
+    .side {
+
+        width: 19rem;
+        height: 120vh;
+
+    }
+
+    .h {
+        margin-bottom: 8rem;
+    }
+
+    .modal2 {
+        margin-bottom: 17rem;
+
+    }
+}
+
+@media (max-width: 1024px) {
+    #conteneur {
+        font-size: 11px;
+    }
+
+    .btn i.fa-eye {
+        height: 4px;
+        width: 8px;
+        font-size: 12px;
+        justify-content: center;
+    }
+
+    .btn i.fa-edit {
+        height: 4px;
+        width: 8px;
+        font-size: 12px;
+        justify-content: center;
+    }
+
+    .btn i.fa-trash-alt {
+        height: 4px;
+        width: 8px;
+        font-size: 12px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .side {
+        width: 12rem;
+    }
+
+    #conteneur {
+        font-size: 8px;
+    }
+
+    .btn i.fa-eye {
+        height: 4px;
+        width: 7px;
+        font-size: 12px;
+        justify-content: center;
+    }
+
+    .btn i.fa-edit {
+        height: 4px;
+        width: 7px;
+        font-size: 12px;
+        justify-content: center;
+    }
+
+    .btn i.fa-trash-alt {
+        height: 4px;
+        width: 7px;
+        font-size: 12px;
+        justify-content: center;
+    }
+
+    #put1,
+    #put2,
+    #put3,
+    #put4,
+    #put5 {
+        width: 9rem;
+    }
+
+    #Submit {
+        width: 9rem;
+    }
+
+    hr {
+        width: 9rem;
+    }
+}
+@media (max-width: 425px) {
+    .side {
+        width: 8rem;
+        margin-left: -2px;
+    }
+
+    #conteneur {
+        width: 26rem;
+        font-size: 5px;
+    }
+
+    i.fa-eye {
+        color: black;
+        justify-content: center;
+        font-size: 3px;
+    }
+
+    i.fa-edit {
+        color: black;
+        font-size: 3px;
+        justify-content: center;
+    }
+
+    i.fa-trash-alt {
+        color: black;
+        font-size: 3px;
+        justify-content: center;
+    }
+
+    #put1,
+    #put2,
+    #put3,
+    #put4,
+    #put5 {
+        width: 7rem;
+        margin-left:-26px ;
+    }
+
+    #Submit {
+        width: 7rem;
+        margin-left:-26px ;
+    }
+
+    hr {
+        width: 7rem;
+        margin-left:-26px ;
+    }
+    #descriptionInput,#categorieSelect,
+    #titreInput,
+    #dateInput,
+    #statutSelect,
+    #Submit {
+        font-size: 8px;
+    }
+    .btn {
+        width: 8px;
+        font-size: 3px;
+    }
+
 }
