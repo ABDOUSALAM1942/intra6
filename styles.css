@@ -1,5 +1,7 @@
 body {
     background-color: #42576e;
+    height: 80vh;
+
 }
 
 * {
@@ -132,8 +134,13 @@ hr {
 
 
 /* Style CSS pour la nouvelle fenêtre modale */
+.h {
+    margin-top: -35rem;
 
-
+}
+#myModal2 {
+    margin-top: -45rem;
+}
 .modal-content2 {
     /* Position au centre de la fenêtre */
     border-radius: 5px;
@@ -217,13 +224,16 @@ hr {
     }
 
     .h {
-        margin-bottom: 8rem;
+        margin-top: -40rem;
     }
 
-    .modal2 {
-        margin-bottom: 17rem;
-
+    #myModal2 {
+        margin-top: -35rem;
     }
+    #hr {
+       margin-bottom: 40rem;
+    }
+
 }
 
 @media (max-width: 1024px) {
@@ -257,6 +267,9 @@ hr {
     .side {
         width: 12rem;
     }
+    #hr {
+        width:26rem;
+     }
 
     #conteneur {
         font-size: 8px;
@@ -304,6 +317,10 @@ hr {
         width: 8rem;
         margin-left: -2px;
     }
+    #hr {
+        width: 17rem;
+    margin-left: 1px;
+     }
 
     #conteneur {
         width: 26rem;
@@ -358,4 +375,10 @@ hr {
         font-size: 3px;
     }
 
+}
+@media (max-width:375px) {
+    #hr {
+        width: 17rem;
+    margin-left: 1px;
+     }
 }
