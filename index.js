@@ -36,7 +36,6 @@ document.getElementById('Submit').addEventListener('click', function (event) {
     event.preventDefault(); // Empêche la soumission du formulaire par défaut
 
     const data = {
-        // Récupérez les valeurs du formulaire ici
         categorie: document.getElementById('categorieSelect').value,
         titre: document.getElementById('titreInput').value,
         date: document.getElementById('dateInput').value,
@@ -44,9 +43,18 @@ document.getElementById('Submit').addEventListener('click', function (event) {
         statut: document.getElementById('statutSelect').value
     };
 
-    AddOrUpdateData(data);
-    resetForm(); // Réinitialisez le formulaire ici
+    // Vérifiez si tous les champs sont remplis
+    if (data.categorie && data.titre && data.date && data.description && data.statut) {
+        // Tous les champs sont remplis, ajoutez les données
+        AddOrUpdateData(data);
+        resetForm(); // Réinitialisez le formulaire ici
+    } else {
+        // Affichez un message d'erreur ou une notification pour informer l'utilisateur
+        showNotification('Erreur', 'Veuillez remplir tous les champs.');
+    }
+
 });
+
 
 // Gestionnaire d'événement pour le bouton "Mettre à jour"
 document.getElementById('Update').addEventListener('click', function (event) {
@@ -429,3 +437,34 @@ const message = `<span class="white-text">${primaryMessage}</span><br><span clas
         notificationModal.style.display = 'none';
     }, 5000); // 5000 millisecondes (5 secondes)
 }
+
+// Récupérez tous les labels
+const labels = document.querySelectorAll("label");
+
+// Masquez tous les labels par défaut
+labels.forEach(label => {
+    label.style.display = "none";
+});
+
+// Ajoutez des gestionnaires d'événements pour chaque champ
+const inputFields = document.querySelectorAll("input, select");
+
+inputFields.forEach(input => {
+    input.addEventListener("focus", () => {
+        // Lorsque le champ est cliqué, affichez uniquement le label associé à ce champ
+        const label = document.querySelector(`label[for="${input.id}"]`);
+        if (label) {
+            labels.forEach(l => {
+                l.style.display = "none"; // Masquez tous les labels
+            });
+            label.style.display = "block"; // Affichez le label associé
+        }
+    });
+
+    input.addEventListener("blur", () => {
+        // Lorsque le champ perd le focus, masquez tous les labels
+        labels.forEach(label => {
+            label.style.display = "none";
+        });
+    });
+});

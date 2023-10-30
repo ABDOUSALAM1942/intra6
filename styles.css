@@ -1,7 +1,5 @@
 body {
     background-color: #42576e;
-    height: 80vh;
-
 }
 
 * {
@@ -13,6 +11,7 @@ body {
 }
 
 #conteneur {
+    overflow: hidden;
     display: flex;
     justify-content: center;
     margin: 30px auto;
@@ -86,12 +85,19 @@ body {
 }
 
 
-
+#put1 {
+    margin-top: 30px;
+    margin-left: 21px;
+}
+#categorieSelect{
+    width: 165px;
+}
 #put2,
 #put3,
 #put4,
 #put5 {
     margin-top: -20px;
+    padding: 20px;
 }
 
 hr {
@@ -209,6 +215,25 @@ hr {
     color: black;
     /* Texte en noir */
 }
+/* Styles pour les labels */
+label {
+    border-radius: 5px;
+    border: 2px solid rgb(239, 11, 243);
+    width: 6rem;
+    background-color: #007bff;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333; /* Couleur par défaut du texte du label */
+    transition: color 0.3s; /* Animation de la couleur au survol */
+}
+
+/* Styles pour les labels au survol */
+label:hover {
+    color: #fafbfd; /* Couleur du texte au survol */
+}
+
+
 
 
 @media (max-width: 1440px) {
@@ -264,6 +289,9 @@ hr {
 }
 
 @media (max-width: 768px) {
+    #categorieSelect{
+        width: 105px;
+    }
     .side {
         width: 12rem;
     }
@@ -313,6 +341,22 @@ hr {
     }
 }
 @media (max-width: 425px) {
+    label {
+        border-radius: 5px;
+        border: 2px solid rgb(239, 11, 243);
+        width: 3rem;
+        background-color: #007bff;
+        display: block;
+        font-weight: bold;
+        font-size: 7px;
+        margin-bottom: 5px;
+        color: #333; /* Couleur par défaut du texte du label */
+        transition: color 0.3s; /* Animation de la couleur au survol */
+    }
+    #categorieSelect{
+        width: 72px;
+        margin-left: 20px;
+    }
     .side {
         width: 8rem;
         margin-left: -2px;
