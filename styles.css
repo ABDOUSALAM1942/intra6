@@ -223,9 +223,10 @@ label {
     background-color: #007bff;
     display: block;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: -5px;
     color: #333; /* Couleur par défaut du texte du label */
     transition: color 0.3s; /* Animation de la couleur au survol */
+    position: relative;
 }
 
 /* Styles pour les labels au survol */

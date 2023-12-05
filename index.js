@@ -1,7 +1,11 @@
-// Récupérer les données du localStorage
+
 function getStoredData() {
     const storedData = localStorage.getItem('crudData');
     return storedData ? JSON.parse(storedData) : [];
+}
+function updateStoredData(data) {
+    // Mettez à jour les données stockées dans le localStorage sous la clé 'crudData'
+    localStorage.setItem('crudData', JSON.stringify(data));
 }
 
 // Ajouter une nouvelle entrée
@@ -11,30 +15,27 @@ function addData(data) {
     localStorage.setItem('crudData', JSON.stringify(storedData));
     updateStatusChart();
     loadInitialData();
-    // Affichez une notification après l'ajout
     showNotification('Ajout entré.', 'Nouvelle entrée ajoutée avec succès.');
 }
 
-// Fonction pour réinitialiser le formulaire
+// Fonction pour réinitialiser le formulaire:
+// réinitialise les champs d'un formulaire HTML, réinitialise la sélection des options, et ajuste l'affichage des boutons "Ajouter" et "Mettre à jour".
 function resetForm() {
     document.getElementById('categorieSelect').selectedIndex = 0;
     document.getElementById('titreInput').value = '';
     document.getElementById('dateInput').value = '';
     document.getElementById('descriptionInput').value = '';
     document.getElementById('statutSelect').selectedIndex = 0;
-
     const submitButton = document.getElementById('Submit');
     const updateButton = document.getElementById('Update');
-
-    submitButton.style.display = 'inline-block'; // Affichez à nouveau le bouton "Ajouter"
-    updateButton.style.display = 'none'; // Masquez le bouton "Mettre à jour"
+    submitButton.style.display = 'inline-block';
+    updateButton.style.display = 'none';
     updateButton.removeAttribute('data-id');
 }
 
 // Gestionnaire d'événement pour le bouton "Ajouter"
 document.getElementById('Submit').addEventListener('click', function (event) {
-    event.preventDefault(); // Empêche la soumission du formulaire par défaut
-
+    event.preventDefault();
     const data = {
         categorie: document.getElementById('categorieSelect').value,
         titre: document.getElementById('titreInput').value,
@@ -52,13 +53,11 @@ document.getElementById('Submit').addEventListener('click', function (event) {
         // Affichez un message d'erreur ou une notification pour informer l'utilisateur
         showNotification('Erreur', 'Veuillez remplir tous les champs.');
     }
-
 });
-
 
 // Gestionnaire d'événement pour le bouton "Mettre à jour"
 document.getElementById('Update').addEventListener('click', function (event) {
-    event.preventDefault(); // Empêche la soumission du formulaire par défaut
+    event.preventDefault();
 
     const data = {
         // Récupérez les valeurs du formulaire ici
@@ -71,17 +70,16 @@ document.getElementById('Update').addEventListener('click', function (event) {
 
     // Obtenez l'ID de l'élément à mettre à jour depuis l'attribut "data-id"
     const itemIdToUpdate = this.getAttribute('data-id');
-
     updateData(itemIdToUpdate, data);
-    resetForm(); // Réinitialisez le formulaire ici
+    resetForm();
 });
 
-// Fonction pour activer le bouton "Mettre à jour" en fonction de l'ID
-function enableUpdateButton(id) {
-    const updateButton = document.getElementById('Update');
-    updateButton.style.display = 'inline-block';
-    updateButton.setAttribute('data-id', id); // Stockez l'ID de l'élément à mettre à jour
-}
+// // Fonction pour activer le bouton "Mettre à jour" en fonction de l'ID
+// function enableUpdateButton(id) {
+//     const updateButton = document.getElementById('Update');
+//     updateButton.style.display = 'inline-block';
+//     updateButton.setAttribute('data-id', id); // Stockez l'ID de l'élément à mettre à jour
+// }
 
 // Mettre à jour une entrée existante par ID
 function updateData(id, data) {
@@ -98,90 +96,81 @@ function updateData(id, data) {
         // Mettez à jour les données stockées avec les données mises à jour
         updateStoredData(storedData);
         updateStatusChart();
-        // Après avoir mis à jour les données, vous pouvez effectuer des actions supplémentaires si nécessaire
-        // Par exemple, réinitialisez le formulaire après la mise à jour
         resetForm();
-        // Vous pouvez également masquer le bouton "Update" ou effectuer d'autres actions selon votre logique
         loadInitialData();
-         // Affichez une notification après la mise à jour
-         showNotification('Mise à jour.','Entrée mise à jour avec succès.');
+        showNotification('Mise à jour.', 'Entrée mise à jour avec succès.');
     }
 }
 
-function updateStoredData(data) {
-    // Mettez à jour les données stockées dans le localStorage sous la clé 'crudData'
-    localStorage.setItem('crudData', JSON.stringify(data));
-}
 
-// Supprimer une entrée par son ID
+// Fonction pour supprimer une entrée de données par son identifiant
 function deleteData(id) {
     console.log(id);
-    const storedData = getStoredData();
-    const index = storedData.findIndex(item => item.id === id);
+    const storedData = getStoredData(); // Récupération des données stockées
+    const index = storedData.findIndex(item => item.id === id); // Recherche de l'indice de l'élément à supprimer
 
+    // Vérification si l'élément avec l'identifiant spécifié a été trouvé
     if (index !== -1) {
-        storedData.splice(index, 1);
+        storedData.splice(index, 1); // Suppression de l'élément du tableau
         localStorage.setItem('crudData', JSON.stringify(storedData));
         updateStatusChart();
         loadInitialData();
-        showNotification('Suppression','Entrée supprimée avec succès.');
-    
+        showNotification('Suppression', 'Entrée supprimée avec succès.');
     }
 }
 
-// Cette fonction supprime une entrée du tableau de données en utilisant son ID.
-// Elle recherche d'abord l'index de l'élément à supprimer, puis le retire du tableau.
-// Ensuite, elle sauvegarde le tableau mis à jour dans le localStorage et appelle 'loadInitialData' pour mettre à jour l'affichage.
-
 // La fonction 'loadInitialData' met à jour l'affichage initial de la table des données en fonction des données stockées dans le localStorage.
 
-function showCategoryOptions() {
-    // Sélectionnez l'élément de sélection de catégorie
-    const categorieSelect = document.getElementById('categorieSelect');
+// function showCategoryOptions() {
+//     // Sélectionnez l'élément de sélection de catégorie
+//     const categorieSelect = document.getElementById('categorieSelect');
 
-    // Vous pouvez afficher les options de catégorie en fonction de votre logique
-    // Par exemple, si vous avez une liste pré-définie d'options de catégorie, vous pouvez les ajouter ici
-    // Voici un exemple avec des options statiques :
+//     // Vous pouvez afficher les options de catégorie en fonction de votre logique
+//     // Par exemple, si vous avez une liste pré-définie d'options de catégorie, vous pouvez les ajouter ici
+//     // Voici un exemple avec des options statiques :
 
-    categorieSelect.innerHTML = ''; // Effacez toutes les options actuelles
+//     categorieSelect.innerHTML = ''; // Effacez toutes les options actuelles
 
-    const categorieOptions = [
-        { value: 'Academique', label: 'Academique' },
-        { value: 'Extra-academique', label: 'Extra-academique' },
-        { value: 'Distraction', label: 'Distraction' }
-    ];
+// // Définition des options de la catégorie sous forme d'un tableau d'objets
+// const categorieOptions = [
+//     { value: 'Academique', label: 'Academique' },
+//     { value: 'Extra-academique', label: 'Extra-academique' },
+//     { value: 'Distraction', label: 'Distraction' }
+// ];
 
-    categorieOptions.forEach(option => {
-        const optionElement = document.createElement('option');
-        optionElement.value = option.value;
-        optionElement.textContent = option.label;
-        categorieSelect.appendChild(optionElement);
-    });
-}
+// // Boucle à travers chaque option et création des éléments d'option pour le menu déroulant
+// categorieOptions.forEach(option => {
+//     // Création d'un élément d'option
+//     const optionElement = document.createElement('option');
+//     // Attribution de la valeur et du texte de l'option à partir des propriétés de l'objet
+//     optionElement.value = option.value;
+//     optionElement.textContent = option.label;
+//     // Ajout de l'élément d'option au menu déroulant (select)
+//     categorieSelect.appendChild(optionElement);
+// });
+// }
 
-function showStatusOptions() {
-    // Sélectionnez l'élément de sélection de statut
-    const statutSelect = document.getElementById('statutSelect');
+// function showStatusOptions() {
+//     // Sélectionnez l'élément de sélection de statut
+//     const statutSelect = document.getElementById('statutSelect');
 
-    // Vous pouvez afficher les options de statut en fonction de votre logique
-    // Par exemple, si vous avez une liste pré-définie d'options de statut, vous pouvez les ajouter ici
-    // Voici un exemple avec des options statiques :
+//     // Vous pouvez afficher les options de statut en fonction de votre logique
+//     // Par exemple, si vous avez une liste pré-définie d'options de statut, vous pouvez les ajouter ici
+//     // Voici un exemple avec des options statiques :
+//     statutSelect.innerHTML = ''; // Effacez toutes les options actuelles
+//     const statutOptions = [
+//         { value: 'Nouveau', label: 'Nouveau' },
+//         { value: 'En cours', label: 'En cours' },
+//         { value: 'Terminé', label: 'Terminé' }
+//     ];
 
-    statutSelect.innerHTML = ''; // Effacez toutes les options actuelles
-
-    const statutOptions = [
-        { value: 'Nouveau', label: 'Nouveau' },
-        { value: 'En cours', label: 'En cours' },
-        { value: 'Terminé', label: 'Terminé' }
-    ];
-
-    statutOptions.forEach(option => {
-        const optionElement = document.createElement('option');
-        optionElement.value = option.value;
-        optionElement.textContent = option.label;
-        statutSelect.appendChild(optionElement);
-    });
-}
+//     statutOptions.forEach(option => {
+//         const optionElement = document.createElement('option');
+//         optionElement.value = option.value;
+//         optionElement.textContent = option.label;
+//         statutSelect.appendChild(optionElement);
+//     });
+// }
 
 // La fonction 'AddOrUpdateData' gère l'ajout ou la mise à jour de données en fonction de la présence ou de l'absence du bouton "Update".
 // Elle récupère les valeurs du formulaire, crée un nouvel objet de données, puis appelle 'addData' ou 'updateData' en conséquence.
@@ -227,22 +216,26 @@ function viewData(id) {
     }
 }
 
+// Fonction pour charger les données initiales dans le tableau
 function loadInitialData() {
-    const storedData = getStoredData();
-    const tableBody = document.getElementById('tableBody'); // Sélectionnez la balise tbody
-    tableBody.innerHTML = ''; // Effacez le contenu existant
+    const storedData = getStoredData(); // Récupération des données stockées
+    const tableBody = document.getElementById('tableBody'); // Sélection de la balise tbody
 
+    tableBody.innerHTML = ''; // Effacement du contenu existant dans le tableau
+
+    // Boucle à travers les données stockées pour créer les lignes du tableau
     for (let i = 0; i < storedData.length; i++) {
         const rowData = storedData[i];
         const row = document.createElement('tr');
-        row.id = `entry-${rowData.id}`;
-        row.setAttribute('data-id', rowData.id); // Ajoutez un attribut "data-id" à la ligne
-    
+        row.id = `entry-${rowData.id}`; // Attribution d'un identifiant unique à la ligne
+        row.setAttribute('data-id', rowData.id); // Ajout d'un attribut "data-id" à la ligne
+
+        // Ajout d'un écouteur d'événement pour afficher la description de la tâche lors du clic sur la ligne
         row.addEventListener('click', function () {
-            // Appeler une fonction pour afficher la description de la tâche
             viewDescription(rowData.id);
         });
-    
+
+        // Remplissage des cellules de la ligne avec les données de l'élément actuel
         row.innerHTML = `
             <td>${i + 1}</td>
             <td>${rowData.date}</td>
@@ -260,10 +253,10 @@ function loadInitialData() {
                 </button>
             </td>
         `;
-    
+
+        // Ajout de la ligne au tableau
         tableBody.appendChild(row);
     }
-    
 }
 
 window.addEventListener('load', loadInitialData);
@@ -297,7 +290,6 @@ function AddOrUpdateData(data) {
     } else {
         // Si le bouton "Update" est affiché, cela signifie que nous mettons à jour des données existantes
         const itemIdToUpdate = updateButton.getAttribute('data-id');
-
         updateData(itemIdToUpdate, {
             categorie: categorieInput,
             titre: titreInput,
@@ -327,8 +319,6 @@ function editData(id) {
 
         const submitButton = document.getElementById('Submit');
         const updateButton = document.getElementById('Update');
-
-
         // Mettez à jour le texte du bouton "Ajouter" en "Mettre à jour"
         submitButton.innerText = 'Ajouter';
 
@@ -353,6 +343,7 @@ function updateStatusChart() {
     };
 
     storedData.forEach(item => {
+        // Incrémentation du compteur pour le statut de l'élément actuel
         statusCount[item.statut]++;
     });
 
@@ -367,9 +358,9 @@ function updateStatusChart() {
             datasets: [{
                 data: Object.values(statusCount),
                 backgroundColor: [
-                    '#FF6384', '#36A2EB', '#FFCE56', 
+                    '#FF6384', '#36A2EB', '#FFCE56',
                     // Vous pouvez ajouter plus de couleurs ici si nécessaire
-                  ],
+                ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
@@ -381,9 +372,9 @@ function updateStatusChart() {
         options: {
             responsive: true, // Permet au graphique de s'adapter à la taille de son conteneur
             layout: {
-              padding: 20,
+                padding: 20,
             },
-          },
+        },
     });
 }
 
@@ -392,6 +383,7 @@ updateStatusChart();
 
 function viewDescription(id) {
     const storedData = getStoredData();
+    // Recherche de l'élément dans les données stockées qui correspond à l'identifiant spécifié
     const dataToView = storedData.find(item => item.id === id);
 
     if (dataToView) {
@@ -404,7 +396,7 @@ function viewDescription(id) {
         // Afficher la fenêtre modale pour la description
         const modal2 = document.getElementById('myModal2');
         modal2.style.display = 'block';
-       
+
 
         // Gestionnaire d'événement pour fermer la fenêtre modale de la description
         const closeModalButton2 = document.getElementsByClassName('close2')[0];
@@ -425,10 +417,9 @@ function showNotification(primaryMessage, secondaryMessage) {
     const notificationModal = document.getElementById('notificationModal');
     const notificationMessage = document.getElementById('notificationMessage');
 
-// Créez un message qui contient les deux lignes avec des balises span pour le style
-const message = `<span class="white-text">${primaryMessage}</span><br><span class="black-text">${secondaryMessage}</span>`;    // Affichez le message de notification dans la fenêtre modale
+    // Créez un message qui contient les deux lignes avec des balises span pour le style
+    const message = `<span class="white-text">${primaryMessage}</span><br><span class="black-text">${secondaryMessage}</span>`;    // Affichez le message de notification dans la fenêtre modale
     notificationMessage.innerHTML = message;
-
     // Affichez la fenêtre modale
     notificationModal.style.display = 'block';
 
@@ -449,20 +440,28 @@ labels.forEach(label => {
 // Ajoutez des gestionnaires d'événements pour chaque champ
 const inputFields = document.querySelectorAll("input, select");
 
+// Pour chaque champ de saisie dans le tableau inputFields
 inputFields.forEach(input => {
+    // Ajout d'un écouteur d'événement pour le focus
     input.addEventListener("focus", () => {
         // Lorsque le champ est cliqué, affichez uniquement le label associé à ce champ
         const label = document.querySelector(`label[for="${input.id}"]`);
+
+        // Vérifiez si un label associé a été trouvé
         if (label) {
+            // Masquez tous les labels
             labels.forEach(l => {
-                l.style.display = "none"; // Masquez tous les labels
+                l.style.display = "none";
             });
-            label.style.display = "block"; // Affichez le label associé
+
+            // Affichez le label associé au champ de saisie qui a le focus
+            label.style.display = "block";
         }
     });
 
+    // Ajout d'un écouteur d'événement pour le blur
     input.addEventListener("blur", () => {
-        // Lorsque le champ perd le focus, masquez tous les labels
+        // Lorsque le champ perd le focus, masquez tous les labels associés
         labels.forEach(label => {
             label.style.display = "none";
         });
