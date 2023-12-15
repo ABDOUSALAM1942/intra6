@@ -4,7 +4,6 @@ function getStoredData() {
     return storedData ? JSON.parse(storedData) : [];
 }
 function updateStoredData(data) {
-    // Mettez à jour les données stockées dans le localStorage sous la clé 'crudData'
     localStorage.setItem('crudData', JSON.stringify(data));
 }
 
@@ -18,7 +17,6 @@ function addData(data) {
     showNotification('Ajout entré.', 'Nouvelle entrée ajoutée avec succès.');
 }
 
-// Fonction pour réinitialiser le formulaire:
 // réinitialise les champs d'un formulaire HTML, réinitialise la sélection des options, et ajuste l'affichage des boutons "Ajouter" et "Mettre à jour".
 function resetForm() {
     document.getElementById('categorieSelect').selectedIndex = 0;
@@ -58,7 +56,6 @@ document.getElementById('Submit').addEventListener('click', function (event) {
 // Gestionnaire d'événement pour le bouton "Mettre à jour"
 document.getElementById('Update').addEventListener('click', function (event) {
     event.preventDefault();
-
     const data = {
         // Récupérez les valeurs du formulaire ici
         categorie: document.getElementById('categorieSelect').value,
@@ -196,7 +193,6 @@ function viewData(id) {
             <p><strong>Description:</strong> ${dataToView.description}</p>
             <p><strong>Statut:</strong> ${dataToView.statut}</p>
         `;
-
         // Afficher la fenêtre modale
         const modal = document.getElementById('myModal');
         modal.style.display = 'block';
@@ -272,7 +268,6 @@ function AddOrUpdateData(data) {
     const descriptionInput = document.querySelector('#descriptionInput').value;
     const statutSelect = document.querySelector('#statutSelect');
     const statutInput = statutSelect.value;
-
     const updateButton = document.querySelector('#Update');
 
     if (updateButton.style.display === 'none') {
@@ -285,7 +280,6 @@ function AddOrUpdateData(data) {
             description: descriptionInput,
             statut: statutInput
         };
-
         addData(data);
     } else {
         // Si le bouton "Update" est affiché, cela signifie que nous mettons à jour des données existantes
@@ -319,8 +313,6 @@ function editData(id) {
 
         const submitButton = document.getElementById('Submit');
         const updateButton = document.getElementById('Update');
-        // Mettez à jour le texte du bouton "Ajouter" en "Mettre à jour"
-        submitButton.innerText = 'Ajouter';
 
         submitButton.style.display = 'none'; // Masquez le bouton "Ajouter"
         updateButton.style.display = 'inline-block'; // Affichez le bouton "Mettre à jour"
@@ -439,7 +431,6 @@ labels.forEach(label => {
 
 // Ajoutez des gestionnaires d'événements pour chaque champ
 const inputFields = document.querySelectorAll("input, select");
-
 // Pour chaque champ de saisie dans le tableau inputFields
 inputFields.forEach(input => {
     // Ajout d'un écouteur d'événement pour le focus
